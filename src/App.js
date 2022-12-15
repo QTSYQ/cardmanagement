@@ -1,24 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import styled, { createGlobalStyle } from "styled-components";
+import reset from "styled-reset";
+import "./font-family.css";
+import PaymentMainPage from "./page/PaymentMainPage";
+
+const GlobalStyles = createGlobalStyle` 
+      ${reset}
+      a{
+          text-decoration: none;
+          color: inherit;
+      }
+      *{
+          box-sizing: border-box;
+      }
+      body {
+          font-family: "Pretendard-Regular";
+          font-weight: 400;
+          font-size: 14px;
+          background-color: rgba(20, 20, 20, 1);
+          padding-top: 50px;
+      }
+  `;
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <GlobalStyles />
+      <PaymentMainPage></PaymentMainPage>
+    </>
   );
 }
 
