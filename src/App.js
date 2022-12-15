@@ -1,8 +1,8 @@
 import "./App.css";
-import styled, { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 import "./font-family.css";
-import PaymentMainPage from "./page/PaymentMainPage";
+import PaymentMainPage from "./pages/PaymentMainPage";
 
 const GlobalStyles = createGlobalStyle` 
       ${reset}
@@ -14,11 +14,12 @@ const GlobalStyles = createGlobalStyle`
           box-sizing: border-box;
       }
       body {
-          font-family: "Pretendard-Regular";
-          font-weight: 400;
+          font-family: "Pretendard";
           font-size: 14px;
-          background-color: rgba(20, 20, 20, 1);
+          background-color: gray;
+          line-height: 175%;
           padding-top: 50px;
+          color:${(props) => props.theme.grayColor900};
       }
   `;
 
