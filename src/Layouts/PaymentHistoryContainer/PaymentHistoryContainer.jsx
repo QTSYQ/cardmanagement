@@ -1,10 +1,9 @@
 import styled from "styled-components";
-import PaymentHistory from "./../../components/PaymentHistoty/PaymentHistory";
+import PaymentHistory from "../../components/PaymentHistoty/PaymentHistory";
 
 const HistoryContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 16px 16px;
 `;
 
 const HistoryEmpty = styled.div`

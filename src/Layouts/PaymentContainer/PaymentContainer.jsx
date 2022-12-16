@@ -1,10 +1,10 @@
 import styled from "styled-components";
-
+import LongButton from "./../../components/common/Buttons/LongButton/LongButton";
+import { FiPlus } from "react-icons/fi";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 16px 16px;
 `;
 
 const SubTitle = styled.div`
@@ -32,6 +32,12 @@ function PaymentContainer({ title, content }) {
       <Container>
         <SubTitle>{title}</SubTitle>
         <EmptyContainer>{content}</EmptyContainer>
+        <LongButton
+          plus={<FiPlus />}
+          content="결제수단 추가하기"
+          color="#AA6140"
+          to="/create"
+        />
       </Container>
     </>
   );

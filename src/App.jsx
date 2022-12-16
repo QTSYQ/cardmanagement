@@ -2,8 +2,7 @@ import "./App.css";
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 import "./font-family.css";
-import PaymentMainPage from "./pages/PaymentMainPage";
-
+import Router from "./Router";
 const GlobalStyles = createGlobalStyle` 
       ${reset}
       a{
@@ -27,7 +26,7 @@ function App() {
   return (
     <>
       <GlobalStyles />
-      <PaymentMainPage></PaymentMainPage>
+      <Router></Router>
     </>
   );
 }
