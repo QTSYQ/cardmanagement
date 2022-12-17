@@ -5,6 +5,7 @@ import "./font-family.css";
 import Router from "./Router";
 const GlobalStyles = createGlobalStyle` 
       ${reset}
+     
       a{
           text-decoration: none;
           color: inherit;
@@ -13,7 +14,7 @@ const GlobalStyles = createGlobalStyle`
           box-sizing: border-box;
       }
       body {
-          font-family: "Pretendard";
+          font-family:  "Pretendard-Regaular";
           background-color: gray;
           padding-top: 50px;
           color:${(props) => props.theme.grayColor900};

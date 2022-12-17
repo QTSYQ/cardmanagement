@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import BottomButton from "../../components/common/Buttons/BottomButton/BottomButton";
+import BottomLongButton from "../../components/common/Buttons/BottomLongButton/BottomLongButton";
 import LongButton from "../../components/common/Buttons/LongButton/LongButton";
 import SquareCheckBox from "../../components/common/CheckBox/SquareCheckBox/SquareCheckBox";
 import InputSection from "../../components/common/Input/InputSection/InputSection";
@@ -17,6 +17,7 @@ const Container = styled.div`
 
 // 유즈이펙트로 스토리지 붙이기
 function PaymentCardCreateContainer() {
+  const navigate = useNavigate();
   const [isCorporation, setIsCorporation] = useState(false);
   const [corporationNumber, setCorporationNumber] = useState("");
   const [cardNumber, setCardNumber] = useState("");
@@ -42,6 +43,7 @@ function PaymentCardCreateContainer() {
     if (!submit == 0) {
       localStorage.setItem("cardList", JSON.stringify(cardList));
       console.log(cardList, "if문 실행됨 재실행됨");
+      navigate("/");
     }
   }, [submit]);
 
@@ -145,9 +147,14 @@ function PaymentCardCreateContainer() {
               console.log(isDefault);
             }}
           />
-          <BottomButton type="submit" form="form" disabled={true}>
+          <BottomLongButton
+            type="submit"
+            form="form"
+            disabled={true}
+            width="50"
+          >
             {/* <Link to="/">결제수단 추가 하기</Link> */}
-          </BottomButton>
+          </BottomLongButton>
         </form>
       </Container>
     </>

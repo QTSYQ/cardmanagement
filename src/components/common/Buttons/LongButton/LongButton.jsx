@@ -24,7 +24,7 @@ function LongButton({
     font-weight: 700;
     a {
       line-height: 150%;
-      font-family: "Pretendard";
+      font-family: "Pretendard-Regaular";
       width: 100%;
       display: flex;
       justify-content: center;

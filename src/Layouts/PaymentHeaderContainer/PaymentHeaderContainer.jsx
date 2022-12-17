@@ -16,7 +16,6 @@ const HeaderTitle = styled.div`
 `;
 
 const HeaderContent = styled.div`
-  font-weight: 400;
   font-size: 16px;
   line-height: 175%;
   color: ${(props) => props.theme.grayColor900};

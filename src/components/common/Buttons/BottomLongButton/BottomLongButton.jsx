@@ -32,7 +32,7 @@ const Button = styled.button`
   }
 `;
 
-function BottomButton({ children }) {
+function BottomLongButton({ children }) {
   return (
     <>
       <Button>{children}</Button>
@@ -40,4 +40,4 @@ function BottomButton({ children }) {
   );
 }
 
-export default BottomButton;
+export default BottomLongButton;

@@ -3,6 +3,7 @@ import React from "react";
 import PaymentHeaderContainer from "../Layouts/PaymentHeaderContainer/PaymentHeaderContainer";
 import MainContainer from "../Layouts/MainContainer/MainContainer";
 import LongButton from "../components/common/Buttons/LongButton/LongButton";
+import PaymentManagementFormContainer from "../Layouts/PaymentManagementFormContainer/PaymentManagementFormContainer";
 
 function PaymentManagementPage() {
   return (
@@ -18,6 +19,7 @@ function PaymentManagementPage() {
           color="#AA6140"
           to="/create"
         />
+        <PaymentManagementFormContainer />
       </MainContainer>
     </>
   );

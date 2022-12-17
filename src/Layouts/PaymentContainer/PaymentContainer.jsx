@@ -56,8 +56,10 @@ function PaymentContainer({ title }) {
     // console.log(cardList);
     if (cardList.length > 0) {
       setIsCardList(true);
+    } else {
+      localStorage.setItem("cardList", "[]");
     }
-    // console.log(isCardList);
+    console.log(cardList);
   }, []);
 
   return (
