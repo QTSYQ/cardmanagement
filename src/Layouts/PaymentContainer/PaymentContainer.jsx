@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import LongButton from "./../../components/common/Buttons/LongButton/LongButton";
-import { FiPlus } from "react-icons/fi";
+
+import { useEffect, useState } from "react";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -17,27 +18,74 @@ const SubTitle = styled.div`
 const EmptyContainer = styled.div`
   width: 100%;
   font-weight: 400;
-  padding-top: 16px;
+  padding: 16px 0px;
   font-size: 16px;
   line-height: 175%;
   text-align: center;
   color: ${(props) => props.theme.grayColor900};
 `;
 
+const CardContainer = styled.div`
+  width: 100%;
+  font-weight: 400;
+  padding: 16px 0px;
+  font-size: 16px;
+  line-height: 175%;
+  color: ${(props) => props.theme.grayColor900};
+`;
+
+const CardNull = styled.div`
+  padding-bottom: 16px;
+`;
+
+const CardList = styled.div`
+  padding-bottom: 16px;
+`;
+
 const PaymentContainerItem = styled.div``;
 
-function PaymentContainer({ title, content }) {
+function PaymentContainer({ title }) {
+  const [isCardList, setIsCardList] = useState(false);
+  const [cardList, setCardList] = useState(() => {
+    return JSON.parse(localStorage.getItem("cardList")) || [];
+  });
+  useEffect(() => {
+    // const localCardList = JSON.parse(localStorage.getItem("cardList"));
+    // console.log(localCardList);
+    // setCardList(localCardList);
+    // console.log(cardList);
+    if (cardList.length > 0) {
+      setIsCardList(true);
+    }
+    // console.log(isCardList);
+  }, []);
+
   return (
     <>
       <Container>
         <SubTitle>{title}</SubTitle>
-        <EmptyContainer>{content}</EmptyContainer>
-        <LongButton
-          plus={<FiPlus />}
-          content="결제수단 추가하기"
-          color="#AA6140"
-          to="/create"
-        />
+        {isCardList ? (
+          <CardContainer>
+            {cardList.map((card) => {
+              return <CardList>{card.cardNumber}</CardList>;
+            })}
+            <LongButton
+              content="결제수단 관리하기"
+              color="#AA6140"
+              to="/management"
+            />
+          </CardContainer>
+        ) : (
+          <EmptyContainer>
+            <CardNull>등록된 결제수단이 없습니다</CardNull>
+            <LongButton
+              plusicon={true}
+              content="결제수단 추가하기"
+              color="#AA6140"
+              to="/create"
+            />
+          </EmptyContainer>
+        )}
       </Container>
     </>
   );

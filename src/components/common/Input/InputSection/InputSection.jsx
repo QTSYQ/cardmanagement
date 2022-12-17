@@ -18,6 +18,7 @@ const InputContainer = styled.div`
   gap: 8px;
 `;
 const Input = styled.input`
+  font-family: "Pretendard";
   font-weight: 400;
   font-size: 16px;
   line-height: 175%;
@@ -57,6 +58,7 @@ function InputSection({
         <Label>{label}</Label>
         <InputContainer>
           <Input
+            value={value}
             maxLength={maxLength}
             name={name}
             placeholder={placeholder}

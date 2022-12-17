@@ -14,9 +14,7 @@ const GlobalStyles = createGlobalStyle`
       }
       body {
           font-family: "Pretendard";
-          font-size: 14px;
           background-color: gray;
-          line-height: 175%;
           padding-top: 50px;
           color:${(props) => props.theme.grayColor900};
       }

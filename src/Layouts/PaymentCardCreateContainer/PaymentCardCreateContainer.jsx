@@ -1,31 +1,24 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
+import BottomButton from "../../components/common/Buttons/BottomButton/BottomButton";
 import LongButton from "../../components/common/Buttons/LongButton/LongButton";
-import CheckBox from "../../components/common/CheckBox/CheckBox";
-import InputSection from "../../components/common/InputSection/InputSection";
+import SquareCheckBox from "../../components/common/CheckBox/SquareCheckBox/SquareCheckBox";
+import InputSection from "../../components/common/Input/InputSection/InputSection";
 import { theme } from "./../../theme";
 
-const Button = styled.button`
-  width: 100%;
+const Container = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  background-color: white;
-  color: black;
-  border: 1px solid black;
-  border-radius: 99px;
-  font-size: 16px;
-  line-height: 150%;
-  font-weight: 700;
+  flex-direction: column;
+  position: relative;
 `;
-const countCard = (card) => {
-  console.log(card, "계산중");
-  return card.length;
-};
 
+// 버튼 컴포넌트로 옮길생각하기
+
+// 유즈이펙트로 스토리지 붙이기
 function PaymentCardCreateContainer() {
   const [isCorporation, setIsCorporation] = useState(false);
+  const [corporationNumber, setCorporationNumber] = useState("");
   const [cardNumber, setCardNumber] = useState("");
   const [isCardNumber, setIsCardNumber] = useState(true);
   const [cardDate, setCardDate] = useState("");
@@ -35,17 +28,33 @@ function PaymentCardCreateContainer() {
   const [cardPassword, setCardPassword] = useState("");
   const [iscardPasswordValid, setIsCardPasswordValid] = useState(true);
   const [isDefault, setIsDefault] = useState(true);
-  const [cardList, setCardList] = useState([{}]);
-  const id = useRef(0);
+  const [cardList, setCardList] = useState([]);
+  const [submit, setSubmit] = useState(0);
+  useEffect(() => {
+    console.log(cardList, "처음 실행시 카드리스트1");
+    const localCardList = localStorage.getItem("cardList");
+    console.log(localCardList, JSON.parse(localCardList));
+    setCardList(JSON.parse(localCardList));
+    console.log(JSON.parse(localCardList), cardList, "처음 실행시 카드리스트2");
+  }, []);
 
-  const numberOfCard = useMemo(() => countCard(cardList), [cardList]);
+  useEffect(() => {
+    if (!submit == 0) {
+      localStorage.setItem("cardList", JSON.stringify(cardList));
+      console.log(cardList, "if문 실행됨 재실행됨");
+    }
+  }, [submit]);
+
   const onSubmit = (e) => {
+    console.log(cardList, "서밋될때 카드리스트");
     e.preventDefault();
-    id.current += 1;
+    const localCardList = localStorage.getItem("cardList");
+    console.log(localCardList, JSON.parse(localCardList), "서믿됨");
+    setCardList(JSON.parse(localCardList));
+    console.log(cardList, "서밋될때 카드리스트2");
     setCardList([
       ...cardList,
       {
-        id: id.current,
         cardNumber: cardNumber,
         cardDate: cardDate,
         birthday: birthday,
@@ -53,64 +62,94 @@ function PaymentCardCreateContainer() {
         isDefault: isDefault,
       },
     ]);
+    setSubmit(submit + 1);
+    console.log(localCardList, "로컬스토리지");
+    console.log(cardList, "카드리스트 넣음");
   };
 
   return (
     <>
-      <form id="form" onSubmit={onSubmit}>
-        <CheckBox content="법인카드 입니다" />
-        <InputSection
-          label="카드번호"
-          placeholder="- 를 제외하고 입력해주세요"
-          name="cardnumber"
-          value={cardNumber}
-          alertText=""
-          maxLength={16}
-          onChange={(event) => {
-            const inputValue = event.currentTarget.value;
-            setCardNumber(inputValue);
-          }}
-        />
+      <Container>
+        <form id="form" onSubmit={onSubmit}>
+          <SquareCheckBox
+            content="법인카드 입니다"
+            isChecked={isCorporation}
+            onChange={(event) => {
+              setIsCorporation(!isCorporation);
+              console.log(isCorporation);
+            }}
+          />
+          <InputSection
+            label="카드번호"
+            placeholder="- 를 제외하고 입력해주세요"
+            name="cardnumber"
+            value={cardNumber}
+            alertText=""
+            maxLength={16}
+            onChange={(event) => {
+              setCardNumber(event.target.value);
+            }}
+          />
 
-        <InputSection
-          label="카드유효기간"
-          placeholder="MMYY(예:0122)"
-          name="cardDate"
-          value={cardDate}
-          alertText=""
-          onChange={(event) => {
-            const inputValue = event.currentTarget.value;
-            setCardDate(inputValue);
-          }}
-        />
-        <InputSection
-          label="생년월일"
-          placeholder="YYMMDD(예:220101)"
-          name="birthday"
-          value={birthday}
-          alertText=""
-          onChange={(event) => {
-            const inputValue = event.currentTarget.value;
-            setBirthday(inputValue);
-          }}
-        />
-        <InputSection
-          label="카드 비밀번호 앞 두자리"
-          placeholder="앞 두자리만 입력해주세요"
-          name="cardPassword"
-          value={cardPassword}
-          type="password"
-          alertText=""
-          onChange={(event) => {
-            const inputValue = event.currentTarget.value;
-            setCardPassword(inputValue);
-          }}
-        />
-        <CheckBox content="이 카드를 대표 결제수단으로 설정합니다" />
-      </form>
-      <Button type="submit" form="form">
-        결제수단 추가하기
-      </Button>
+          <InputSection
+            label="카드유효기간"
+            placeholder="MMYY(예:0122)"
+            name="cardDate"
+            value={cardDate}
+            alertText=""
+            onChange={(event) => {
+              setCardDate(event.target.value);
+            }}
+          />
+          {isCorporation ? (
+            <InputSection
+              label="사업자번호"
+              placeholder="YYMMDD(예:220101)"
+              name="birthday"
+              value={birthday}
+              alertText=""
+              onChange={(event) => {
+                setBirthday(event.target.value);
+              }}
+            />
+          ) : (
+            <InputSection
+              label="생년월일"
+              placeholder="YYMMDD(예:220101)"
+              name="birthday"
+              value={birthday}
+              alertText=""
+              onChange={(event) => {
+                setBirthday(event.target.value);
+              }}
+            />
+          )}
+
+          <InputSection
+            label="카드 비밀번호 앞 두자리"
+            placeholder="앞 두자리만 입력해주세요"
+            name="cardPassword"
+            value={cardPassword}
+            type="password"
+            alertText=""
+            onChange={(event) => {
+              const inputValue = event.currentTarget.value;
+              setCardPassword(inputValue);
+            }}
+          />
+          <SquareCheckBox
+            content="이 카드를 대표 결제수단으로 설정합니다"
+            isChecked={isDefault}
+            onChange={(event) => {
+              setIsDefault(!isDefault);
+              console.log(isDefault);
+            }}
+          />
+          <BottomButton type="submit" form="form" disabled={true}>
+            {/* <Link to="/">결제수단 추가 하기</Link> */}
+          </BottomButton>
+        </form>
+      </Container>
     </>
   );
 }

@@ -5,6 +5,7 @@ const HeaderContainer = styled.div`
   width: 100%;
   flex-direction: column;
   align-items: flex-start;
+  padding: 16px 0px;
 `;
 
 const HeaderTitle = styled.div`

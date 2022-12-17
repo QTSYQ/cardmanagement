@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-
+import { FiPlus } from "react-icons/fi";
 function LongButton({
-  plus,
+  plusicon,
   content,
   color,
   bgcolor,
@@ -21,19 +21,20 @@ function LongButton({
     color: ${color};
     border: 1px solid ${color};
     border-radius: 99px;
-    font-size: 16px;
-    line-height: 150%;
     font-weight: 700;
     a {
+      line-height: 150%;
+      font-family: "Pretendard";
       width: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
+      font-size: 16px;
       padding: 12px 16px;
       border-radius: 99px;
     }
     &:hover {
-      /* cursor: pointer; */
+      cursor: pointer;
     }
   `;
 
@@ -41,7 +42,7 @@ function LongButton({
     <>
       <Button>
         <Link to={to}>
-          {plus ? plus : null} {content}
+          {plusicon ? <FiPlus /> : null} {content}
         </Link>
       </Button>
     </>

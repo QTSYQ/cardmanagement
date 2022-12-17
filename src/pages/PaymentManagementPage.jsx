@@ -1,20 +1,26 @@
 import styled from "styled-components";
 import React from "react";
-const PaymentContainerItem = styled.div``;
+import PaymentHeaderContainer from "../Layouts/PaymentHeaderContainer/PaymentHeaderContainer";
+import MainContainer from "../Layouts/MainContainer/MainContainer";
+import LongButton from "../components/common/Buttons/LongButton/LongButton";
 
-const DefaultCard = styled.div``;
-
-const PaymentAddButton = styled.div``;
-
-const PaymentHistoryTitle = styled.div``;
-
-const PaymentHistoryDate = styled.div``;
-
-const PaymentHistoryCard = styled.div``;
-
-const PaymentHistoryPrice = styled.div``;
 function PaymentManagementPage() {
-  return <></>;
+  return (
+    <>
+      <MainContainer>
+        <PaymentHeaderContainer
+          title="결제수단 관리"
+          content="수단 추가/삭제, 대표카드를 변경할 수 있습니다"
+        ></PaymentHeaderContainer>
+        <LongButton
+          plusicon={true}
+          content="결제수단 추가하기"
+          color="#AA6140"
+          to="/create"
+        />
+      </MainContainer>
+    </>
+  );
 }
 
 export default PaymentManagementPage;
