@@ -15,10 +15,10 @@ function PaymentMainPage() {
           content="결제수단과 결제내역을 확인할 수 있습니다."
         />
         <PaymentContainer title="내 결제수단" />
-        {/* <PaymentHistoryContainer
+        <PaymentHistoryContainer
           title="내 결제내역"
           content="결제내역이 없습니다."
-        /> */}
+        />
       </MainContainer>
     </>
   );

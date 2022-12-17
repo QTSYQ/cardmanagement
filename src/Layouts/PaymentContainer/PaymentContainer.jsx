@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import LongButton from "./../../components/common/Buttons/LongButton/LongButton";
-
 import { useEffect, useState } from "react";
+import CardInfo from "./../../components/common/CardInfo/CardInfo";
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -40,6 +41,9 @@ const CardNull = styled.div`
 
 const CardList = styled.div`
   padding-bottom: 16px;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
 `;
 
 const PaymentContainerItem = styled.div``;
@@ -68,8 +72,19 @@ function PaymentContainer({ title }) {
         <SubTitle>{title}</SubTitle>
         {isCardList ? (
           <CardContainer>
-            {cardList.map((card) => {
-              return <CardList>{card.cardNumber}</CardList>;
+            {cardList.map((card, index) => {
+              return (
+                <CardList key={index}>
+                  {card.cardNumber}{" "}
+                  {card.isDefault ? (
+                    <CardInfo
+                      content="대표카드"
+                      color="#AA6140"
+                      bgcolor="#F2E4DD"
+                    />
+                  ) : null}
+                </CardList>
+              );
             })}
             <LongButton
               content="결제수단 관리하기"

@@ -7,16 +7,18 @@ function ShortButton({
   onClick,
   content,
   bordercolor,
+  disabledcolor,
+  disabledbgcolor,
 }) {
   const Button = styled.button`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: ${(props) => width};
+    width: ${width};
     gap: 8px;
-    color: ${(props) => color};
-    background-color: ${(props) => bgcolor};
-    border: 1px solid ${(props) => bordercolor};
+    color: ${color};
+    background-color: ${bgcolor};
+    border: 1px solid ${bordercolor};
     border-radius: 99px;
     font-size: 16px;
     line-height: 150%;
@@ -28,8 +30,8 @@ function ShortButton({
       cursor: pointer;
     }
     &:disabled {
-      background-color: ${(props) => props.theme.brownColor300};
-      border: 1px solid ${(props) => props.theme.brownColor300};
+      background-color: ${disabledbgcolor};
+      color: ${disabledcolor};
     }
   `;
   return (

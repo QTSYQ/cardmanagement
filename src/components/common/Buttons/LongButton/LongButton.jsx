@@ -32,6 +32,7 @@ function LongButton({
       font-size: 16px;
       padding: 12px 16px;
       border-radius: 99px;
+      gap: 8px;
     }
     &:hover {
       cursor: pointer;
@@ -42,7 +43,7 @@ function LongButton({
     <>
       <Button>
         <Link to={to}>
-          {plusicon ? <FiPlus /> : null} {content}
+          {plusicon ? <FiPlus size={21} /> : null} {content}
         </Link>
       </Button>
     </>

@@ -1,5 +1,5 @@
 function SnackBar() {
-  return <></>;
+  return <> </>;
 }
 
 export default SnackBar;

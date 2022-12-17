@@ -21,12 +21,13 @@ const HeaderContent = styled.div`
   color: ${(props) => props.theme.grayColor900};
 `;
 
-function PaymentHeaderContainer({ title, content }) {
+function PaymentHeaderContainer({ title, content, children }) {
   return (
     <>
       <HeaderContainer>
         <HeaderTitle>{title}</HeaderTitle>
         <HeaderContent>{content}</HeaderContent>
+        {children}
       </HeaderContainer>
     </>
   );

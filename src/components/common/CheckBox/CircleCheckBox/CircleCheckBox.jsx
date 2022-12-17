@@ -7,7 +7,7 @@ const Container = styled.div`
 const Content = styled.div`
   display: flex;
   align-items: flex-start;
-  font-weight: 400;
+  font-weight: 700;
   font-size: 16px;
   line-height: 175%;
   color: ${(props) => props.theme.grayColor900};
@@ -30,13 +30,7 @@ function CircleCheckBox({ isChecked, content, onChange, name, value }) {
     <>
       <Container>
         <Label>
-          <Input
-            type="radio"
-            onChange={onChange}
-            name={name}
-            value={value}
-            checked={isChecked}
-          />
+          <Input type="radio" onChange={onChange} name={name} value={value} />
           <Icon>
             {isChecked ? (
               <BsRecordCircleFill
