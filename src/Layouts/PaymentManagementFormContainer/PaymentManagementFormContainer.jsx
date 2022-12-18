@@ -3,6 +3,9 @@ import CircleCheckBox from "../../components/common/CheckBox/CircleCheckBox/Circ
 import { useState, useEffect } from "react";
 import ShortButton from "../../components/common/Buttons/ShortButton/ShortButton";
 import CardInfo from "./../../components/common/CardInfo/CardInfo";
+import SnackBar from "../../components/common/SnackBar/SnackBar";
+import StyledModal from "./../../components/common/StyledModal/StyledModal";
+
 const BottomButtonContainer = styled.div`
   position: fixed;
   bottom: 19px;
@@ -65,6 +68,7 @@ function PaymentManagementFormContainer() {
             </CardContainer>
           );
         })}
+        <StyledModal content="삭제할 수 없는 카드입니다"></StyledModal>
       </Container>
       <BottomButtonContainer>
         <ShortButton

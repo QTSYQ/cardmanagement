@@ -13,16 +13,9 @@ const Button = styled.button`
   border-radius: 99px;
   font-size: 16px;
   line-height: 150%;
-  a {
-    font-family: "Pretendard";
-    font-weight: 700;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 12px 16px;
-    border-radius: 99px;
-  }
+  font-weight: 700;
+  font-family: "Pretendard-Regaular";
+  padding: 12px 16px;
   &:hover {
     cursor: pointer;
   }
@@ -32,10 +25,10 @@ const Button = styled.button`
   }
 `;
 
-function BottomLongButton({ children }) {
+function BottomLongButton({ children, content, disabled }) {
   return (
     <>
-      <Button>{children}</Button>
+      <Button disabled={disabled}>{content}</Button>
     </>
   );
 }
