@@ -9,6 +9,7 @@ function ShortButton({
   bordercolor,
   disabledcolor,
   disabledbgcolor,
+  disable,
 }) {
   const Button = styled.button`
     display: flex;
@@ -36,7 +37,9 @@ function ShortButton({
   `;
   return (
     <>
-      <Button>{content}</Button>
+      <Button disabled={disable} onClick={onClick}>
+        {content}
+      </Button>
     </>
   );
 }

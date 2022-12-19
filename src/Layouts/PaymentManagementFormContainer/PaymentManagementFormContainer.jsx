@@ -4,7 +4,8 @@ import { useState, useEffect } from "react";
 import ShortButton from "../../components/common/Buttons/ShortButton/ShortButton";
 import CardInfo from "./../../components/common/CardInfo/CardInfo";
 import SnackBar from "../../components/common/SnackBar/SnackBar";
-import StyledModal from "./../../components/common/StyledModal/StyledModal";
+import StyledModal from "../../components/common/Modal/StyledModal";
+import FailedModal from "../../components/common/Modal/FailedModal/FailedModal";
 
 const BottomButtonContainer = styled.div`
   position: fixed;
@@ -13,6 +14,7 @@ const BottomButtonContainer = styled.div`
   gap: 8px;
   justify-content: center;
   align-items: center;
+  padding: 0px 16px;
 `;
 
 const CardContainer = styled.div`
@@ -26,28 +28,32 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
+  padding: 16px 16px;
 `;
 
 function PaymentManagementFormContainer() {
-  const [isCheck, setIsCheck] = useState(null);
   const [cardList, setCardList] = useState(() => {
-    return JSON.parse(localStorage.getItem("cardList")) || [];
+    return JSON.parse(localStorage.getItem("cardList"));
   });
+  const [checkNumber, setIsCheckNumber] = useState(null);
+  const [failedModalOpen, setFailedModalOpen] = useState(false);
+
   useEffect(() => {
     // 선택한 value 확인하기
-    console.log("체크확인", isCheck);
-  }, [isCheck]);
+    console.log("체크확인", checkNumber);
+  }, [checkNumber]);
+
   const handleChange = (e) => {
     // setIsCheck(!isCheck);
     console.log(e.target.value);
-    setIsCheck(e.target.value);
+    setIsCheckNumber(e.target.value);
   };
 
   return (
     <>
       <Container>
         {cardList.map((card, index) => {
-          console.log(isCheck);
+          console.log(checkNumber);
           return (
             <CardContainer>
               <CircleCheckBox
@@ -55,8 +61,19 @@ function PaymentManagementFormContainer() {
                 name="check"
                 value={index}
                 onChange={(e) => handleChange(e)}
-                content={card.cardNumber}
-                isChecked={isCheck == index}
+                content={[...card.cardNumber].map((el, index) => {
+                  if (el == " ") {
+                    el = "-";
+                  }
+                  if (
+                    (index >= 5 && index <= 8) ||
+                    (index >= 10 && index <= 13)
+                  ) {
+                    el = "*";
+                  }
+                  return el;
+                })}
+                isChecked={checkNumber == index}
               ></CircleCheckBox>
               {card.isDefault ? (
                 <CardInfo
@@ -68,7 +85,6 @@ function PaymentManagementFormContainer() {
             </CardContainer>
           );
         })}
-        <StyledModal content="삭제할 수 없는 카드입니다"></StyledModal>
       </Container>
       <BottomButtonContainer>
         <ShortButton
@@ -79,7 +95,15 @@ function PaymentManagementFormContainer() {
           bgcolor="#FFFFFF"
           disabledcolor="#C6C2BF"
           disabledbgcolor="#F6F5F5"
+          //   disable={checkNumber == null ? true : false}
+          onClick={() => {
+            //체크넘버가 같으면 실패 모달창 띄우기
+            console.log("실패 모달창");
+            setFailedModalOpen(true);
+            // 체크넘버가 다르면 확인 모달창 띄우기
+          }}
         ></ShortButton>
+        {failedModalOpen ? <FailedModal></FailedModal> : null}
         <ShortButton
           content="대표카드 변경"
           color="white"
@@ -87,6 +111,7 @@ function PaymentManagementFormContainer() {
           bordercolor="#CF9981"
           bgcolor="#AA6140"
           disabledcolor="#CF9981"
+          disable={checkNumber == null ? true : false}
         ></ShortButton>
       </BottomButtonContainer>
     </>

@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
 function PaymentHistoryEmptyContainer() {
+  const Container = styled.div`
+    padding: 16px 16px;
+  `;
+
   const HistoryEmpty = styled.div`
     width: 100%;
     font-weight: 400;
@@ -18,8 +22,10 @@ function PaymentHistoryEmptyContainer() {
   `;
   return (
     <>
-      <SubTitle>내 결제내역</SubTitle>
-      <HistoryEmpty>결제내역이 없습니다.</HistoryEmpty>
+      <Container>
+        <SubTitle>내 결제내역</SubTitle>
+        <HistoryEmpty>결제내역이 없습니다.</HistoryEmpty>
+      </Container>
     </>
   );
 }

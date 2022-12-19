@@ -4,7 +4,6 @@ import PaymentHeaderContainer from "../Layouts/PaymentHeaderContainer/PaymentHea
 import MainContainer from "../Layouts/MainContainer/MainContainer";
 import LongButton from "../components/common/Buttons/LongButton/LongButton";
 import PaymentManagementFormContainer from "../Layouts/PaymentManagementFormContainer/PaymentManagementFormContainer";
-import StyledModal from "../components/common/StyledModal/StyledModal";
 const Container = styled.div`
   height: 100vh;
 `;

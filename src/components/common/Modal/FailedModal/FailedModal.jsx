@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import CardInfo from "../CardInfo/CardInfo";
 import Modal from "styled-react-modal";
 import { useState } from "react";
+import CardInfo from "../../CardInfo/CardInfo";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -30,15 +30,13 @@ const FancyModal = Modal.styled`
   padding: 32px 16px 24px;
   gap: 8px;
 `;
-
-function StyledModal({ content }) {
-  const [isOpen, setIsOpen] = useState(false);
-  const [opacity, setOpacity] = useState(0);
+function FailedModal({ content }) {
+  const [isOpen, setIsOpen] = useState(true);
+  const [opacity, setOpacity] = useState(1);
   function toggleModal(e) {
-    setOpacity(0);
+    setOpacity(1);
     setIsOpen(!isOpen);
   }
-
   function afterOpen() {
     setTimeout(() => {
       setOpacity(1);
@@ -54,7 +52,6 @@ function StyledModal({ content }) {
 
   return (
     <>
-      <button onClick={toggleModal}>Open modal</button>
       <FancyModal
         isOpen={isOpen}
         afterOpen={afterOpen}
@@ -74,10 +71,16 @@ function StyledModal({ content }) {
             대표 카드는 삭제할 수 없습니다. 대표 카드 변경 뒤에 삭제해주세요
           </Content>
         </Container>
-        <button onClick={toggleModal}>Close me</button>
+        <button
+          onClick={() => {
+            toggleModal();
+          }}
+        >
+          Close me
+        </button>
       </FancyModal>
     </>
   );
 }
 
-export default StyledModal;
+export default FailedModal;

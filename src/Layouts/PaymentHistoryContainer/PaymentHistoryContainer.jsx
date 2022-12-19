@@ -6,15 +6,17 @@ import { historyData } from "./historyData";
 const HistoryContainer = styled.div`
   display: flex;
   flex-direction: column;
+  background-color: white;
+  padding: 16px 16px;
 `;
 
 // 결제수단 추가되면 결제내역 나오게 바꾸기
 function PaymentHistoryContainer({ title, content }) {
   const { ref, inView, entry } = useInView({
-    threshold: 0.4,
+    threshold: 0,
   });
 
-  const [endNumber, setEndNumber] = useState(4);
+  const [endNumber, setEndNumber] = useState(3);
   const [historyList, setHistoryList] = useState([]);
   useEffect(() => {
     setHistoryList(historyData);

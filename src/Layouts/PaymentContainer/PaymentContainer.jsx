@@ -7,6 +7,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  padding: 16px 16px;
 `;
 
 const SubTitle = styled.div`
@@ -75,7 +76,18 @@ function PaymentContainer({ title }) {
             {cardList.map((card, index) => {
               return (
                 <CardList key={index}>
-                  {card.cardNumber}{" "}
+                  {[...card.cardNumber].map((el, index) => {
+                    if (el == " ") {
+                      el = "-";
+                    }
+                    if (
+                      (index >= 5 && index <= 8) ||
+                      (index >= 10 && index <= 13)
+                    ) {
+                      el = "*";
+                    }
+                    return el;
+                  })}{" "}
                   {card.isDefault ? (
                     <CardInfo
                       content="대표카드"

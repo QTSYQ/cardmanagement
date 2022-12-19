@@ -11,6 +11,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
+  padding: 16px 16px;
 `;
 
 function PaymentCardCreateContainer() {
@@ -34,8 +35,11 @@ function PaymentCardCreateContainer() {
   const [cardPasswordClass, setCardPasswordClass] = useState("");
   const [isDefault, setIsDefault] = useState(false);
   const [isButtonValid, setIsButtonValid] = useState(false);
-  const [cardList, setCardList] = useState([]);
+  const [cardList, setCardList] = useState(() => {
+    return JSON.parse(localStorage.getItem("cardList")) || [];
+  });
   const [submit, setSubmit] = useState(0);
+
   useEffect(() => {
     console.log(cardList, "처음 실행시 카드리스트1");
     const localCardList = localStorage.getItem("cardList");
@@ -44,12 +48,41 @@ function PaymentCardCreateContainer() {
     console.log(JSON.parse(localCardList), cardList, "처음 실행시 카드리스트2");
   }, []);
 
-  useEffect(() => {});
+  useEffect(() => {}, [
+    cardNumber,
+    corporationNumber,
+    cardPassword,
+    birthday,
+    cardDate,
+  ]);
 
   useEffect(() => {
     if (!submit == 0) {
+      // 어차피 cardList.isDefault의 true는 배열의 0번째 값이고
+      const d = 0;
+      // cardList.isDefault는 true가 하나여야만 한다
+      const defaultCard = cardList[0]; // true 카드
+      cardList.map((cards, index) => {
+        //모든 카드를 돌면서 is.Default검사
+        if (cards.isDefault) {
+          // 카드가 true라면
+          //그 카드가 혹시 첫번째인지 확인
+          if (cards == defaultCard) {
+            console.log(cards, " : 이 카드는 첫번째입니다");
+          } else {
+            //그럼 여기에 첫번째 카드가 아닌 다른 true가 올거고 ㅇㅇ?
+            console.log("새로운 대표 카드 입니다", cards);
+            // 만약 cardList.isDefault가 뒤에 추가된다면 0번째의 디폴트를 false로하고
+            cardList[0].isDefault = false;
+            // 뒤에있는 true카드를 0번째 배열과 바꾼다
+            cardList[index] = cardList[0];
+            cardList[0] = cards;
+          }
+        }
+        cardList[0].isDefault = true;
+      });
+      console.log("if문 실행됨 재실행됨");
       localStorage.setItem("cardList", JSON.stringify(cardList));
-      console.log(cardList, "if문 실행됨 재실행됨");
       navigate(-1);
     }
   }, [submit]);
@@ -58,7 +91,7 @@ function PaymentCardCreateContainer() {
     console.log(cardList, "서밋될때 카드리스트");
     e.preventDefault();
     const localCardList = localStorage.getItem("cardList");
-    console.log(localCardList, JSON.parse(localCardList), "서믿됨");
+    console.log(localCardList, JSON.parse(localCardList), "서밋됨");
     setCardList(JSON.parse(localCardList));
     console.log(cardList, "서밋될때 카드리스트2");
     setCardList([
@@ -76,7 +109,6 @@ function PaymentCardCreateContainer() {
     console.log(localCardList, "로컬스토리지");
     console.log(cardList, "카드리스트 넣음");
   };
-
   return (
     <>
       <Container>
