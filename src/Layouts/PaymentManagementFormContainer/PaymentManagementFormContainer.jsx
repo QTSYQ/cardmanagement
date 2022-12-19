@@ -4,8 +4,6 @@ import { useState, useEffect } from "react";
 import ShortButton from "../../components/common/Buttons/ShortButton/ShortButton";
 import CardInfo from "./../../components/common/CardInfo/CardInfo";
 import SnackBar from "../../components/common/SnackBar/SnackBar";
-import StyledModal from "../../components/common/Modal/StyledModal";
-import FailedModal from "../../components/common/Modal/FailedModal/FailedModal";
 
 const BottomButtonContainer = styled.div`
   position: fixed;
@@ -103,7 +101,6 @@ function PaymentManagementFormContainer() {
             // 체크넘버가 다르면 확인 모달창 띄우기
           }}
         ></ShortButton>
-        {failedModalOpen ? <FailedModal></FailedModal> : null}
         <ShortButton
           content="대표카드 변경"
           color="white"

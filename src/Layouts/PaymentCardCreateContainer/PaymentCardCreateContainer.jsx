@@ -34,7 +34,7 @@ function PaymentCardCreateContainer() {
   const [isCardPasswordValid, setIsCardPasswordValid] = useState(true);
   const [cardPasswordClass, setCardPasswordClass] = useState("");
   const [isDefault, setIsDefault] = useState(false);
-  const [isButtonValid, setIsButtonValid] = useState(false);
+  const [isButtonValid, setIsButtonValid] = useState(true);
   const [cardList, setCardList] = useState(() => {
     return JSON.parse(localStorage.getItem("cardList")) || [];
   });
@@ -307,19 +307,41 @@ function PaymentCardCreateContainer() {
               console.log(isDefault);
             }}
           />
-          <BottomLongButton
-            content="결제수단 추가하기"
-            type="submit"
-            form="form"
-            disabled={
-              !isCardNumberValid ||
-              !isCardPasswordValid ||
-              !cardDate ||
-              !birthday
-            }
-          >
-            {/* <Link to="/">결제수단 추가 하기</Link> */}
-          </BottomLongButton>
+          {isCorporation ? (
+            <BottomLongButton
+              content="(법인)결제수단 추가하기"
+              type="submit"
+              form="form"
+              // false면 불들어옴
+              disabled={
+                !isCardNumberValid ||
+                !isCardPasswordValid ||
+                !isCorporationNumberValid ||
+                !isBirthdayValid ||
+                !cardNumber ||
+                !cardPassword ||
+                !cardDate ||
+                !corporationNumber
+              }
+            ></BottomLongButton>
+          ) : (
+            <BottomLongButton
+              content="(그냥)결제수단 추가하기"
+              type="submit"
+              form="form"
+              // false면 불들어옴
+              disabled={
+                !isCardNumberValid ||
+                !isCardPasswordValid ||
+                !isCardDateValid ||
+                !isBirthdayValid ||
+                !cardNumber ||
+                !cardPassword ||
+                !cardDate ||
+                !birthday
+              }
+            ></BottomLongButton>
+          )}
         </form>
         <SnackBar
           title="카드정보 오류"
