@@ -1,9 +1,10 @@
 import styled from "styled-components";
 import CircleCheckBox from "../../components/common/CheckBox/CircleCheckBox/CircleCheckBox";
 import { useState, useEffect } from "react";
-import ShortButton from "../../components/common/Buttons/ShortButton/ShortButton";
+import ShortButton from "../../components/common/Buttons/ModalButton/ModalButton";
 import CardInfo from "./../../components/common/CardInfo/CardInfo";
 import SnackBar from "../../components/common/SnackBar/SnackBar";
+import StyledModal from "../../components/common/Modal/StyledModal/StyledModal";
 
 const BottomButtonContainer = styled.div`
   position: fixed;
@@ -85,22 +86,12 @@ function PaymentManagementFormContainer() {
         })}
       </Container>
       <BottomButtonContainer>
-        <ShortButton
-          content="삭제"
-          color="#625C57"
-          width="145px"
-          bordercolor="#C6C2BF"
-          bgcolor="#FFFFFF"
-          disabledcolor="#C6C2BF"
-          disabledbgcolor="#F6F5F5"
-          //   disable={checkNumber == null ? true : false}
-          onClick={() => {
-            //체크넘버가 같으면 실패 모달창 띄우기
-            console.log("실패 모달창");
-            setFailedModalOpen(true);
-            // 체크넘버가 다르면 확인 모달창 띄우기
-          }}
-        ></ShortButton>
+        //대표카드 삭제시도 버튼모달
+        <StyledModal
+          title="삭제할 수 없는 카드입니다"
+          content="대표 카드는 삭제할 수 없습니다. 대표 카드 변경 뒤에 삭제해주세요."
+          closetext="확인했습니다"
+        ></StyledModal>
         <ShortButton
           content="대표카드 변경"
           color="white"

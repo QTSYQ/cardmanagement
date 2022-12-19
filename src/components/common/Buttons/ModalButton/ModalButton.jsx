@@ -1,5 +1,5 @@
 import styled from "styled-components";
-function ShortButton({
+function ModalButton({
   children,
   width,
   color,
@@ -10,6 +10,7 @@ function ShortButton({
   disabledcolor,
   disabledbgcolor,
   disable,
+  closetext,
 }) {
   const Button = styled.button`
     display: flex;
@@ -44,4 +45,4 @@ function ShortButton({
   );
 }
 
-export default ShortButton;
+export default ModalButton;

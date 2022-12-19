@@ -83,7 +83,7 @@ function PaymentCardCreateContainer() {
       });
       console.log("if문 실행됨 재실행됨");
       localStorage.setItem("cardList", JSON.stringify(cardList));
-      navigate(-1);
+      navigate("/");
     }
   }, [submit]);
 
