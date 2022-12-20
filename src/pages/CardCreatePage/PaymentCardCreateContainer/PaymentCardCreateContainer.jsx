@@ -172,19 +172,19 @@ function PaymentCardCreateContainer() {
             classname={cardNumberClass}
             onChange={(event) => {
               const inputValue = event.target.value;
-              const triminputValue = event.target.value
+              const trimInputValue = event.target.value
                 .replace(/[^0-9]/gi, "")
                 .replace(/(.{4})/g, "$1 ")
                 .trim();
               setCardNumberClass("isTyping");
-              setCardNumber(triminputValue);
+              setCardNumber(trimInputValue);
               if (inputValue.length == 19) {
                 setCardNumberClass("isValid");
                 setIsCardNumberValid(true);
               } else {
                 setIsCardNumberValid(false);
               }
-              setCardNumber(triminputValue);
+              setCardNumber(trimInputValue);
             }}
             onBlur={(event) => {
               if (cardNumber.length < 19) {
@@ -206,9 +206,9 @@ function PaymentCardCreateContainer() {
             //1번째자리 0 1 2 , 2번째자리 0~9, 세번째자리 0~9, 네번재자리 0~9
             onChange={(event) => {
               const inputValue = event.target.value;
-              const triminputValue = event.target.value.replace(/[^0-9]/g, "");
+              const trimInputValue = event.target.value.replace(/[^0-9]/g, "");
               setCardDateClass("isTyping");
-              setCardDate(triminputValue);
+              setCardDate(trimInputValue);
               if (
                 inputValue.length == 4 &&
                 /^(0[1-9]|1[0-2])\/?([0-9]{4}|[0-9]{2})$/.test(inputValue)
@@ -221,7 +221,7 @@ function PaymentCardCreateContainer() {
                 setCardDateClass("isWarning");
                 setIsCardDateValid(false);
               }
-              setCardDate(triminputValue);
+              setCardDate(trimInputValue);
             }}
             onBlur={(event) => {
               if (cardDate.length < 4) {
@@ -242,19 +242,19 @@ function PaymentCardCreateContainer() {
               alertText={isCorporation ? null : ""}
               onChange={(event) => {
                 const inputValue = event.target.value;
-                const triminputValue = event.target.value
+                const trimInputValue = event.target.value
                   .replace(/[^0-9]/g, "")
                   .replace(/^(\d{0,3})(\d{0,2})(\d{0,5})$/g, "$1 $2 $3")
                   .trim();
                 setCorporationNumberClass("isTyping");
-                setCorporationNumber(triminputValue);
+                setCorporationNumber(trimInputValue);
                 if (inputValue.length == 12) {
                   setCorporationNumberClass("isValid");
                   setIsCorporationNumberValid(true);
                 } else {
                   setIsCorporationNumberValid(false);
                 }
-                setCorporationNumber(triminputValue);
+                setCorporationNumber(trimInputValue);
               }}
               onBlur={(event) => {
                 if (corporationNumber.length < 12) {
@@ -279,12 +279,12 @@ function PaymentCardCreateContainer() {
               }
               onChange={(event) => {
                 const inputValue = event.target.value;
-                const triminputValue = event.target.value.replace(
+                const trimInputValue = event.target.value.replace(
                   /[^0-9]/g,
                   ""
                 );
                 setBirthdayClass("isTyping");
-                setBirthday(triminputValue);
+                setBirthday(trimInputValue);
                 if (
                   inputValue.length == 6 &&
                   /^[0-9][0-9](0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])$/.test(
@@ -299,7 +299,7 @@ function PaymentCardCreateContainer() {
                   setBirthdayClass("isWarning");
                   setIsBirthdayValid(false);
                 }
-                setBirthday(triminputValue);
+                setBirthday(trimInputValue);
               }}
               onBlur={(event) => {
                 if (birthday.length < 6) {
@@ -324,18 +324,18 @@ function PaymentCardCreateContainer() {
             }
             onChange={(event) => {
               const inputValue = event.target.value;
-              const triminputValue = event.target.value
+              const trimInputValue = event.target.value
                 .replace(/[^0-9]/gi, "")
                 .trim();
               setCardPasswordClass("isTyping");
-              setCardPassword(triminputValue);
+              setCardPassword(trimInputValue);
               if (inputValue.length == 2) {
                 setCardPasswordClass("isValid");
                 setIsCardPasswordValid(true);
               } else {
                 setIsCardPasswordValid(false);
               }
-              setCardPassword(triminputValue);
+              setCardPassword(trimInputValue);
             }}
             onBlur={(event) => {
               if (cardPassword.length < 2) {
