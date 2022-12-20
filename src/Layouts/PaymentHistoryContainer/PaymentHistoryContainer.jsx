@@ -13,7 +13,7 @@ const HistoryContainer = styled.div`
 // 결제수단 추가되면 결제내역 나오게 바꾸기
 function PaymentHistoryContainer({ title, content }) {
   const { ref, inView, entry } = useInView({
-    threshold: 0,
+    threshold: 0.9,
   });
 
   const [endNumber, setEndNumber] = useState(3);

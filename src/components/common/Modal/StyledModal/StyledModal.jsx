@@ -126,7 +126,6 @@ function StyledModal({
               content={content}
               onClick={() => {
                 onClick();
-                console.log("지워짐");
                 toggleModal();
               }}
             ></ModalButton>

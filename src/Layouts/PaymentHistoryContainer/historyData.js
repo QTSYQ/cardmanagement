@@ -21,7 +21,7 @@ export const historyData = [
     title: "레슨셰어 적립액 일시결제",
     date: "2022.09.11",
     cardName: "농협카드",
-    price: "900,000원",
+    price: "9,000원",
   },
   {
     title: "레슨셰어 적립액 일시결제",

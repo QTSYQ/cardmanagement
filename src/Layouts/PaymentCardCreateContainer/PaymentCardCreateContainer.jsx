@@ -34,11 +34,11 @@ function PaymentCardCreateContainer() {
   const [isCardPasswordValid, setIsCardPasswordValid] = useState(true);
   const [cardPasswordClass, setCardPasswordClass] = useState("");
   const [isDefault, setIsDefault] = useState(false);
-  const [isButtonValid, setIsButtonValid] = useState(true);
   const [cardList, setCardList] = useState(() => {
     return JSON.parse(localStorage.getItem("cardList")) || [];
   });
   const [submit, setSubmit] = useState(0);
+  const snackbarRef = useRef(null);
 
   useEffect(() => {
     console.log(cardList, "처음 실행시 카드리스트1");
@@ -59,7 +59,6 @@ function PaymentCardCreateContainer() {
   useEffect(() => {
     if (!submit == 0) {
       // 어차피 cardList.isDefault의 true는 배열의 0번째 값이고
-      const d = 0;
       // cardList.isDefault는 true가 하나여야만 한다
       const defaultCard = cardList[0]; // true 카드
       cardList.map((cards, index) => {
@@ -81,34 +80,72 @@ function PaymentCardCreateContainer() {
         }
         cardList[0].isDefault = true;
       });
-      console.log("if문 실행됨 재실행됨");
       localStorage.setItem("cardList", JSON.stringify(cardList));
       navigate("/");
     }
   }, [submit]);
 
   const onSubmit = (e) => {
-    console.log(cardList, "서밋될때 카드리스트");
     e.preventDefault();
+    if (!checkCorporateRegiNumber(corporationNumber) && isCorporation) {
+      console.log(snackbarRef);
+      snackbarRef.current.show();
+      return 0;
+    }
     const localCardList = localStorage.getItem("cardList");
-    console.log(localCardList, JSON.parse(localCardList), "서밋됨");
     setCardList(JSON.parse(localCardList));
-    console.log(cardList, "서밋될때 카드리스트2");
-    setCardList([
-      ...cardList,
-      {
-        cardNumber: cardNumber,
-        cardDate: cardDate,
-        birthday: birthday,
-        cardPassword: cardPassword,
-        isDefault: isDefault,
-        isCorporation: isCorporation,
-      },
-    ]);
+    {
+      isCorporation
+        ? setCardList([
+            ...cardList,
+            {
+              cardNumber: cardNumber,
+              cardDate: cardDate,
+              cardPassword: cardPassword,
+              isDefault: isDefault,
+              isCorporation: isCorporation,
+              corporationNumber: corporationNumber,
+            },
+          ])
+        : setCardList([
+            ...cardList,
+            {
+              cardNumber: cardNumber,
+              cardDate: cardDate,
+              birthday: birthday,
+              cardPassword: cardPassword,
+              isDefault: isDefault,
+              isCorporation: isCorporation,
+            },
+          ]);
+    }
     setSubmit(submit + 1);
-    console.log(localCardList, "로컬스토리지");
-    console.log(cardList, "카드리스트 넣음");
   };
+
+  function checkCorporateRegiNumber(number) {
+    var numberMap = number
+      .replace(/ /gi, "")
+      .split("")
+      .map(function (d) {
+        return parseInt(d, 10);
+      });
+
+    if (numberMap.length == 10) {
+      var keyArr = [1, 3, 7, 1, 3, 7, 1, 3, 5];
+      var chk = 0;
+
+      keyArr.forEach(function (d, i) {
+        chk += d * numberMap[i];
+      });
+
+      chk += parseInt((keyArr[8] * numberMap[8]) / 10, 10);
+      console.log(chk);
+      return Math.floor(numberMap[9]) === (10 - (chk % 10)) % 10;
+    }
+
+    return false;
+  }
+
   return (
     <>
       <Container>
@@ -205,7 +242,9 @@ function PaymentCardCreateContainer() {
                 const inputValue = event.target.value;
                 const triminputValue = event.target.value
                   .replace(/[^0-9]/g, "")
-                  .replace(/^(\d{0,3})(\d{0,2})(\d{0,5})$/g, "$1 $2 $3");
+                  .replace(/^(\d{0,3})(\d{0,2})(\d{0,5})$/g, "$1 $2 $3")
+                  .trim();
+                console.log(checkCorporateRegiNumber(triminputValue));
                 setCorporationNumberClass("isTyping");
                 setCorporationNumber(triminputValue);
                 if (inputValue.length == 12) {
@@ -239,18 +278,30 @@ function PaymentCardCreateContainer() {
               }
               onChange={(event) => {
                 const inputValue = event.target.value;
-                const triminputValue = event.target.value
+                const triminputValue = event.target.value.replace(
+                  /[^0-9]/g,
+                  ""
+                );
+                // 첫번째, 두번째는 0~9 와도됨,
+                //세번째 0~1 와야됨, 네번째는 0~9인데 세번째에 1나오면 3나오면 안됨,
+                //다섯번째는 0~3, 세번째는 0~9인데 다섯번째 3일때 2오면 안됨
+                // ^\d{2}\(0[1-9]|1[012])\(0[1-9]|[12][0-9]|3[01])*
+                //
 
-                  // 첫번째, 두번째는 0~9 와도됨,
-                  //세번째 0~1 와야됨, 네번째는 0~9인데 세번째에 1나오면 3나오면 안됨,
-                  //다섯번째는 0~3, 세번째는 0~9인데 다섯번째 3일때 2오면 안됨
-                  .replace(/[^0-9]/g, "");
                 setBirthdayClass("isTyping");
                 setBirthday(triminputValue);
-                if (inputValue.length == 6) {
+                if (
+                  inputValue.length == 6 &&
+                  /^[0-9][0-9](0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])$/.test(
+                    inputValue
+                  )
+                ) {
                   setBirthdayClass("isValid");
                   setIsBirthdayValid(true);
+                } else if (inputValue.length < 6) {
+                  setBirthdayClass("isTyping");
                 } else {
+                  setBirthdayClass("isWarning");
                   setIsBirthdayValid(false);
                 }
                 setBirthday(triminputValue);
@@ -316,8 +367,8 @@ function PaymentCardCreateContainer() {
               disabled={
                 !isCardNumberValid ||
                 !isCardPasswordValid ||
+                !isCardDateValid ||
                 !isCorporationNumberValid ||
-                !isBirthdayValid ||
                 !cardNumber ||
                 !cardPassword ||
                 !cardDate ||
@@ -346,6 +397,7 @@ function PaymentCardCreateContainer() {
         <SnackBar
           title="카드정보 오류"
           content="결제수단을 추가할 수 없습니다"
+          ref={snackbarRef}
         ></SnackBar>
       </Container>
     </>
