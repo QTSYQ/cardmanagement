@@ -1,20 +1,15 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import PaymentCardCreatePage from "./pages/PaymentCardCreatePage";
-import PaymentMainPage from "./pages/PaymentMainPage";
-import PaymentManegementPage from "./pages/PaymentManagementPage";
+import PaymentCardCreatePage from "./Layouts/PaymentCardCreateContainer/PaymentCardCreateContainer";
+import PaymentMainPage from "./Layouts/PaymentMainContainer/PaymentMainContainer";
+import PaymentManagementPage from "./Layouts/PaymentManagementContainer/PaymentManagementContainer";
+
 function Router() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<PaymentMainPage></PaymentMainPage>} />
-        <Route
-          path="/create"
-          element={<PaymentCardCreatePage></PaymentCardCreatePage>}
-        />
-        <Route
-          path="/management"
-          element={<PaymentManegementPage></PaymentManegementPage>}
-        />
+        <Route path="/" element={<PaymentMainPage />} />
+        <Route path="/create" element={<PaymentCardCreatePage />} />
+        <Route path="/management" element={<PaymentManagementPage />} />
       </Routes>
     </BrowserRouter>
   );

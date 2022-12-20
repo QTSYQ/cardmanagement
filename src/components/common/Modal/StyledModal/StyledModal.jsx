@@ -34,7 +34,7 @@ const FancyModal = Modal.styled`
   justify-content: center;
   background-color: white;
   opacity: ${(props) => props.opacity};
-  transition: all 0.3s ease-in-out;
+  transition: all 0.5s ease-in-out;
   box-shadow: 0px 4px 16px rgba(44, 41, 39, 0.08);
   border-radius:8px;
   padding: 32px 16px 24px;

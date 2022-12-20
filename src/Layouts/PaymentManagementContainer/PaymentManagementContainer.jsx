@@ -1,9 +1,10 @@
 import styled from "styled-components";
 import React from "react";
-import PaymentHeaderContainer from "../Layouts/PaymentHeaderContainer/PaymentHeaderContainer";
-import MainContainer from "../Layouts/MainContainer/MainContainer";
-import LongButton from "../components/common/Buttons/LongButton/LongButton";
-import PaymentManagementFormContainer from "../Layouts/PaymentManagementFormContainer/PaymentManagementFormContainer";
+import MainContainer from "../MainContainer/MainContainer";
+import PaymentHeaderContainer from "../PaymentHeaderContainer/PaymentHeaderContainer";
+import LongButton from "../../components/common/Buttons/LongButton/LongButton";
+import PaymentManagementFormContainer from "../../pages/CardManagementPage/PaymentManagementFormContainer/PaymentManagementFormContainer";
+
 const Container = styled.div`
   height: 100vh;
   display: flex;

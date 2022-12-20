@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import LongButton from "./../../components/common/Buttons/LongButton/LongButton";
 import { useEffect, useState } from "react";
-import CardInfo from "./../../components/common/CardInfo/CardInfo";
+import LongButton from "../../../components/common/Buttons/LongButton/LongButton";
+import CardInfo from "../../../components/common/CardInfo/CardInfo";
 
 const Container = styled.div`
   display: flex;
@@ -61,16 +61,11 @@ function PaymentContainer({ title }) {
     return JSON.parse(localStorage.getItem("cardList")) || [];
   });
   useEffect(() => {
-    // const localCardList = JSON.parse(localStorage.getItem("cardList"));
-    // console.log(localCardList);
-    // setCardList(localCardList);
-    // console.log(cardList);
     if (cardList.length > 0) {
       setIsCardList(true);
     } else {
       localStorage.setItem("cardList", "[]");
     }
-    console.log(cardList);
   }, []);
 
   return (

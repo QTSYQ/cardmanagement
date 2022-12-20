@@ -1,4 +1,4 @@
-import { FaBalanceScaleLeft, FaCheckSquare } from "react-icons/fa";
+import { FaCheckSquare } from "react-icons/fa";
 import { FiSquare } from "react-icons/fi";
 import styled from "styled-components";
 

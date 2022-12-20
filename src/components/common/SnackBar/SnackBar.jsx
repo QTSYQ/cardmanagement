@@ -1,9 +1,4 @@
-import React, {
-  useState,
-  forwardRef,
-  useImperativeHandle,
-  useEffect,
-} from "react";
+import React, { useState, forwardRef, useImperativeHandle } from "react";
 import styled from "styled-components";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 const Container = styled.div`

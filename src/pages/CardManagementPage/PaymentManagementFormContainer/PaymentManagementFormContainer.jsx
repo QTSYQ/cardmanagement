@@ -1,10 +1,9 @@
 import styled from "styled-components";
-import CircleCheckBox from "../../components/common/CheckBox/CircleCheckBox/CircleCheckBox";
 import { useState, useEffect } from "react";
-import ShortButton from "../../components/common/Buttons/ShortButton/ShortButton";
-import CardInfo from "./../../components/common/CardInfo/CardInfo";
-import SnackBar from "../../components/common/SnackBar/SnackBar";
-import StyledModal from "../../components/common/Modal/StyledModal/StyledModal";
+import CircleCheckBox from "./../../../components/common/CheckBox/CircleCheckBox/CircleCheckBox";
+import CardInfo from "../../../components/common/CardInfo/CardInfo";
+import StyledModal from "./../../../components/common/Modal/StyledModal/StyledModal";
+import ShortButton from "./../../../components/common/Buttons/ShortButton/ShortButton";
 
 const BottomButtonContainer = styled.div`
   position: fixed;
@@ -42,10 +41,6 @@ function PaymentManagementFormContainer() {
   const [isCardDeleteValid, setIsCardDeleteValid] = useState(false);
   const [buttonDisable, setButtonDisable] = useState(true);
   useEffect(() => {
-    console.log("체크넘버 : ", checkNumber);
-    console.log("isCardDeleteValid : ", isCardDeleteValid);
-    console.log(buttonDisable);
-    console.log(buttonDisable);
     if (checkNumber == 0) {
       setIsCardDeleteValid(false);
       setButtonDisable(true);
@@ -64,27 +59,17 @@ function PaymentManagementFormContainer() {
 
   function deleteCard() {
     cardList.splice(checkNumber, 1);
-    console.log(cardList);
     localStorage.setItem("cardList", JSON.stringify(cardList));
     setCardList(JSON.parse(localStorage.getItem("cardList")));
-    console.log("지워짐");
   }
 
   function isDefaultCardChange() {
-    // 대표카드(배열의 첫번째)와
-    // 선택된 카드 (체크카드넘버 인덱스)를
-    // 만약 cardList.isDefault가 뒤에 추가된다면 0번째의 디폴트를 false로하고
-    const selectCard = cardList[checkNumber]; // 선택된 카드
-    const defaultCard = cardList[0]; // 대표카드
-    // 선택된 카드와 대표카드를 바꾼다
-    // cardList[0] = tmp;
-
+    const selectCard = cardList[checkNumber];
+    const defaultCard = cardList[0];
     cardList[0] = selectCard;
     cardList[checkNumber] = defaultCard;
-    // 바꾼 카드를 대표카드로
     cardList[0].isDefault = true;
     cardList[checkNumber].isDefault = false;
-    // 배열순서를 바꾼 배열을 로컬스토리지로 넘겨준다
     localStorage.setItem("cardList", JSON.stringify(cardList));
     setCardList(JSON.parse(localStorage.getItem("cardList")));
   }
@@ -92,12 +77,10 @@ function PaymentManagementFormContainer() {
   return (
     <>
       <Container>
-        {console.log(cardList)}
         {cardList.map((card, index) => {
           return (
-            <CardContainer>
+            <CardContainer key={index}>
               <CircleCheckBox
-                key={index}
                 name="check"
                 value={index}
                 onChange={(e) => handleChange(e)}

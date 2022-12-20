@@ -5,6 +5,16 @@ const Container = styled.div`
   flex-direction: column;
   padding: 8px 0px;
   border-bottom: 1px solid ${(props) => props.theme.grayColor150};
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    background-color: ${(props) => props.theme.grayColor150};
+    width: 330px;
+    height: 1px;
+    bottom: -1px;
+    right: -16px;
+  }
 `;
 
 const DateContainer = styled.div`
@@ -17,11 +27,6 @@ const Title = styled.div`
   line-height: 150%;
 `;
 const DateCardName = styled.div`
-  font-size: 12px;
-  line-height: 175%;
-  color: ${(props) => props.theme.grayColor700};
-`;
-const CardName = styled.div`
   font-size: 12px;
   line-height: 175%;
   color: ${(props) => props.theme.grayColor700};

@@ -1,11 +1,14 @@
 import styled from "styled-components";
 import React, { useEffect, useState } from "react";
-import MainContainer from "../Layouts/MainContainer/MainContainer";
-import PaymentHeaderContainer from "../Layouts/PaymentHeaderContainer/PaymentHeaderContainer";
-import PaymentContainer from "../Layouts/PaymentContainer/PaymentContainer";
-import PaymentHistoryContainer from "../Layouts/PaymentHistoryContainer/PaymentHistoryContainer";
-import { LongButton } from "../components/common/Buttons/LongButton/LongButton";
-import PaymentHistoryEmptyContainer from "../Layouts/PaymentHistoryEmptyContainer/PaymentHistoryEmptyContainer";
+import MainContainer from "../MainContainer/MainContainer";
+// import PaymentHeaderContainer from "../PaymentHeaderContainer/PaymentHeaderContainer";
+// import PaymentContainer from "../../pages/MainPage/PaymentContainer/PaymentContainer";
+// import PaymentHistoryEmptyContainer from "./../PaymentHistoryEmptyContainer/PaymentHistoryEmptyContainer";
+// import PaymentHistoryContainer from "./../PaymentHistoryContainer/PaymentHistoryContainer";
+import PaymentHeaderContainer from "./../PaymentHeaderContainer/PaymentHeaderContainer";
+import PaymentContainer from "./../../pages/MainPage/PaymentContainer/PaymentContainer";
+import PaymentHistoryEmptyContainer from "./../../pages/MainPage/PaymentHistoryEmptyContainer/PaymentHistoryEmptyContainer";
+import PaymentHistoryContainer from "./../../pages/MainPage/PaymentHistoryContainer/PaymentHistoryContainer";
 
 const Container = styled.div`
   height: 100vh;
@@ -23,9 +26,7 @@ function PaymentMainPage() {
   const [cardList, setCardList] = useState(() => {
     return JSON.parse(localStorage.getItem("cardList")) || [];
   });
-  useEffect(() => {
-    console.log(cardList);
-  }, []);
+  useEffect(() => {}, []);
   return (
     <>
       <MainContainer>

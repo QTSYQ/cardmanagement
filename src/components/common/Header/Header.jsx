@@ -1,4 +1,4 @@
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { GrClose } from "react-icons/gr";
 const HeaderContainer = styled.div`
@@ -14,12 +14,12 @@ const HeaderContainer = styled.div`
 function Header() {
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(location);
   return (
     <>
       <HeaderContainer>
         {location.pathname == "/" ? null : (
           <GrClose
+            cursor="pointer"
             size={16}
             color={"#7D766F"}
             onClick={() => {

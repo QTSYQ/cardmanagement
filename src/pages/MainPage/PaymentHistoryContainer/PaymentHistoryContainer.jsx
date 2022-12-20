@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import PaymentHistory from "../../components/PaymentHistoty/PaymentHistory";
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
-import { historyData } from "./historyData";
+import { historyData } from "../../../assets/json/historyData";
+import PaymentHistory from "./PaymentHistoty/PaymentHistory";
 const HistoryContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -17,10 +17,9 @@ const SubTitle = styled.div`
   padding-bottom: 16px;
 `;
 
-// 결제수단 추가되면 결제내역 나오게 바꾸기
-function PaymentHistoryContainer({ title, content }) {
-  const { ref, inView, entry } = useInView({
-    threshold: 0.9,
+function PaymentHistoryContainer() {
+  const { ref, inView } = useInView({
+    threshold: 1,
   });
 
   const [endNumber, setEndNumber] = useState(3);
@@ -30,8 +29,7 @@ function PaymentHistoryContainer({ title, content }) {
   }, []);
 
   useEffect(() => {
-    setEndNumber(endNumber + 4);
-    console.log("endNumber : ", endNumber, "inView", inView);
+    setEndNumber(endNumber + 3);
   }, [inView]);
   return (
     <>
