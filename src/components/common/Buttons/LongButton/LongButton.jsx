@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { FiPlus } from "react-icons/fi";
+import { AiOutlinePlus } from "react-icons/ai";
 function LongButton({
   plusicon,
   content,
@@ -47,7 +47,7 @@ function LongButton({
       <Container>
         <Button>
           <Link to={to}>
-            {plusicon ? <FiPlus size={21} /> : null} {content}
+            {plusicon ? <AiOutlinePlus size={22} /> : null} &nbsp;{content}
           </Link>
         </Button>
       </Container>
