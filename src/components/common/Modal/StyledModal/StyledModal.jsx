@@ -18,6 +18,14 @@ const Content = styled.div`
   padding-top: 8px;
 `;
 
+const ModalButtonContainer = styled.div`
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+`;
+
 const FancyModal = Modal.styled`
   display: flex;
   width:298px;
@@ -34,19 +42,24 @@ const FancyModal = Modal.styled`
 `;
 function StyledModal({
   title,
+  modaltitle,
   content,
+  modalcontent,
   onClick,
-  color,
   width,
+  closemodalwidth,
   closetext,
   confirmText,
-  disable,
+  modalbuttondisable,
+  color,
   bordercolor,
   bgcolor,
   disabledcolor,
+  disabledbgcolor,
   children,
+  deletebutton,
 }) {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const [opacity, setOpacity] = useState(1);
   function toggleModal(e) {
     setOpacity(1);
@@ -67,6 +80,17 @@ function StyledModal({
 
   return (
     <>
+      <ModalButton
+        onClick={toggleModal}
+        bgcolor={bgcolor}
+        width={width}
+        color={color}
+        content={content}
+        disabledcolor={disabledcolor}
+        disabledbgcolor={disabledbgcolor}
+        disable={modalbuttondisable}
+        bordercolor={bordercolor}
+      ></ModalButton>
       <FancyModal
         isOpen={isOpen}
         afterOpen={afterOpen}
@@ -78,13 +102,45 @@ function StyledModal({
       >
         <Container>
           <CardInfo
-            content={title}
+            content={modaltitle}
             color="#B63C34"
             bgcolor="#EFC9C7"
           ></CardInfo>
-          <Content>{content}</Content>
+          <Content>{modalcontent}</Content>
         </Container>
-        <ModalButton content={closetext}></ModalButton>
+        {deletebutton ? (
+          <ModalButtonContainer>
+            <ModalButton
+              bordercolor={bordercolor}
+              width={closemodalwidth}
+              onClick={toggleModal}
+              content={closetext}
+              color={color}
+              bgcolor={bgcolor}
+            ></ModalButton>
+            <ModalButton
+              bordercolor={bordercolor}
+              width={closemodalwidth}
+              color="#FFFFFF"
+              bgcolor="#AA6140"
+              content={content}
+              onClick={() => {
+                onClick();
+                console.log("지워짐");
+                toggleModal();
+              }}
+            ></ModalButton>
+          </ModalButtonContainer>
+        ) : (
+          <ModalButton
+            bordercolor={bordercolor}
+            width={closemodalwidth}
+            onClick={toggleModal}
+            content={closetext}
+            color={color}
+            bgcolor={bgcolor}
+          ></ModalButton>
+        )}
       </FancyModal>
     </>
   );

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-function ModalButton({
+function ShortButton({
   children,
   width,
   color,
@@ -46,4 +46,4 @@ function ModalButton({
   );
 }
 
-export default ModalButton;
+export default ShortButton;
