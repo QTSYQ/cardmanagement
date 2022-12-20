@@ -9,7 +9,10 @@ import PaymentHistoryEmptyContainer from "../Layouts/PaymentHistoryEmptyContaine
 
 const Container = styled.div`
   height: 100vh;
-  background-color: white;
+  background-color: ${(props) => props.theme.grayColor100};
+  display: flex;
+  gap: 8px;
+  flex-direction: column;
 `;
 
 const HistoryContainer = styled.div`

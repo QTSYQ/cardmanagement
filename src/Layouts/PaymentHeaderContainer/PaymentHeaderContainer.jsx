@@ -6,6 +6,7 @@ const HeaderContainer = styled.div`
   flex-direction: column;
   align-items: flex-start;
   padding: 16px 16px;
+  background-color: white;
 `;
 
 const HeaderTitle = styled.div`

@@ -8,7 +8,7 @@ import StyledModal from "../../components/common/Modal/StyledModal/StyledModal";
 
 const BottomButtonContainer = styled.div`
   position: fixed;
-  bottom: 19px;
+  bottom: 16px;
   display: flex;
   gap: 8px;
   padding: 12px 16px;
@@ -29,6 +29,8 @@ const Container = styled.div`
   flex-direction: column;
   gap: 8px;
   padding: 16px 16px;
+  background-color: white;
+  height: 100vh;
 `;
 
 function PaymentManagementFormContainer() {
@@ -161,11 +163,12 @@ function PaymentManagementFormContainer() {
         )}
         <ShortButton
           content="대표카드 변경"
-          color="white"
           width="145px"
+          color="white"
           bordercolor="#CF9981"
           bgcolor="#AA6140"
-          disabledcolor="#CF9981"
+          disabledcolor="white"
+          disabledbgcolor="#CF9981"
           disable={buttonDisable}
           onClick={isDefaultCardChange}
         ></ShortButton>

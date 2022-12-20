@@ -8,6 +8,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: flex-start;
   padding: 16px 16px;
+  background-color: white;
 `;
 
 const SubTitle = styled.div`
@@ -20,7 +21,7 @@ const SubTitle = styled.div`
 const EmptyContainer = styled.div`
   width: 100%;
   font-weight: 400;
-  padding: 16px 0px;
+  padding-top: 16px;
   font-size: 16px;
   line-height: 175%;
   text-align: center;
@@ -30,7 +31,7 @@ const EmptyContainer = styled.div`
 const CardContainer = styled.div`
   width: 100%;
   font-weight: 400;
-  padding: 16px 0px;
+  padding-top: 16px;
   font-size: 16px;
   line-height: 175%;
   color: ${(props) => props.theme.grayColor900};
@@ -38,6 +39,11 @@ const CardContainer = styled.div`
 
 const CardNull = styled.div`
   padding-bottom: 16px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 175%;
+  color: ${(props) => props.theme.grayColor900};
+  font-family: "Pretendard-Regaular";
 `;
 
 const CardList = styled.div`
@@ -106,7 +112,7 @@ function PaymentContainer({ title }) {
           </CardContainer>
         ) : (
           <EmptyContainer>
-            <CardNull>등록된 결제수단이 없습니다</CardNull>
+            <CardNull>등록된 결제수단이 없습니다.</CardNull>
             <LongButton
               plusicon={true}
               content="결제수단 추가하기"

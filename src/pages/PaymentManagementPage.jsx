@@ -6,6 +6,9 @@ import LongButton from "../components/common/Buttons/LongButton/LongButton";
 import PaymentManagementFormContainer from "../Layouts/PaymentManagementFormContainer/PaymentManagementFormContainer";
 const Container = styled.div`
   height: 100vh;
+  display: flex;
+  gap: 8px;
+  flex-direction: column;
 `;
 function PaymentManagementPage() {
   return (

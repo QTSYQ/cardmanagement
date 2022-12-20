@@ -119,7 +119,7 @@ function StyledModal({
               bgcolor={bgcolor}
             ></ModalButton>
             <ModalButton
-              bordercolor={bordercolor}
+              bordercolor="#AA6140"
               width={closemodalwidth}
               color="#FFFFFF"
               bgcolor="#AA6140"

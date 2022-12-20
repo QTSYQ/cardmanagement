@@ -3,7 +3,6 @@ import styled from "styled-components";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 8px;
   padding: 8px 0px;
   border-bottom: 1px solid ${(props) => props.theme.grayColor150};
 `;

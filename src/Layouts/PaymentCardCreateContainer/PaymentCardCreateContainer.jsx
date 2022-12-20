@@ -86,9 +86,12 @@ function PaymentCardCreateContainer() {
   }, [submit]);
 
   const onSubmit = (e) => {
+    console.log(
+      "isValidCardNumber(cardNumber): ",
+      isValidCardNumber(cardNumber)
+    );
     e.preventDefault();
     if (!checkCorporateRegiNumber(corporationNumber) && isCorporation) {
-      console.log(snackbarRef);
       snackbarRef.current.show();
       return 0;
     }
@@ -129,22 +132,39 @@ function PaymentCardCreateContainer() {
       .map(function (d) {
         return parseInt(d, 10);
       });
-
     if (numberMap.length == 10) {
       var keyArr = [1, 3, 7, 1, 3, 7, 1, 3, 5];
       var chk = 0;
-
       keyArr.forEach(function (d, i) {
         chk += d * numberMap[i];
       });
-
       chk += parseInt((keyArr[8] * numberMap[8]) / 10, 10);
       console.log(chk);
       return Math.floor(numberMap[9]) === (10 - (chk % 10)) % 10;
     }
-
     return false;
   }
+
+  const isValidCardNumber = (card) => {
+    card.replace(/ /gi, "").split("");
+    let cardNumberArray = card
+      .replace(/ /gi, "")
+      .split("")
+      .map(function (d) {
+        return parseInt(d, 16);
+      });
+    console.log("cardNumberArray", cardNumberArray);
+    const lastNumber = Number(cardNumberArray.pop());
+    cardNumberArray.reverse();
+    cardNumberArray = cardNumberArray.map((num, idx) =>
+      idx % 2 === 0 ? Number(num) * 2 : Number(num)
+    );
+    cardNumberArray = cardNumberArray.map((num) => (num > 9 ? num - 9 : num));
+    let sum = cardNumberArray.reduce((acc, curr) => acc + curr, 0);
+    sum += lastNumber;
+    const modulo = sum % 10;
+    return !modulo;
+  };
 
   return (
     <>
@@ -205,18 +225,19 @@ function PaymentCardCreateContainer() {
             //1번째자리 0 1 2 , 2번째자리 0~9, 세번째자리 0~9, 네번재자리 0~9
             onChange={(event) => {
               const inputValue = event.target.value;
-              const triminputValue = event.target.value
-                .replace(/[^0-9]/g, "")
-                .replace(/^([2-9])$/g, "0$1")
-                .replace(/^(1{1})([3-9]{1})$/g, "0$1$2")
-                .replace(/^0{1,}/g, "0")
-                .replace(/^([0-1]{1}[0-9]{1})([0-9]{1,2}).*/g, "$1$2");
+              const triminputValue = event.target.value.replace(/[^0-9]/g, "");
               setCardDateClass("isTyping");
               setCardDate(triminputValue);
-              if (inputValue.length == 4) {
+              if (
+                inputValue.length == 4 &&
+                /^(0[1-9]|1[0-2])\/?([0-9]{4}|[0-9]{2})$/.test(inputValue)
+              ) {
                 setCardDateClass("isValid");
                 setIsCardDateValid(true);
+              } else if (inputValue.length < 4) {
+                setCardDateClass("isTyping");
               } else {
+                setCardDateClass("isWarning");
                 setIsCardDateValid(false);
               }
               setCardDate(triminputValue);
@@ -244,7 +265,7 @@ function PaymentCardCreateContainer() {
                   .replace(/[^0-9]/g, "")
                   .replace(/^(\d{0,3})(\d{0,2})(\d{0,5})$/g, "$1 $2 $3")
                   .trim();
-                console.log(checkCorporateRegiNumber(triminputValue));
+                console.log("checkCorporateRegiNumber ", triminputValue);
                 setCorporationNumberClass("isTyping");
                 setCorporationNumber(triminputValue);
                 if (inputValue.length == 12) {

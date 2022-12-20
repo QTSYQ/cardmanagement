@@ -6,6 +6,7 @@ import PaymentCardCreateContainer from "../Layouts/PaymentCardCreateContainer/Pa
 
 const Container = styled.div`
   height: 100vh;
+  background-color: white;
 `;
 function PaymentCardCreatePage() {
   return (

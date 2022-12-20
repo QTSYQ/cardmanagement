@@ -1,4 +1,3 @@
-import "./App.css";
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 import "./font-family.css";
@@ -14,7 +13,7 @@ const GlobalStyles = createGlobalStyle`
           box-sizing: border-box;
       }
       body {
-          font-family:  "Pretendard-Regaular" !important; 
+        font-family:  "Pretendard-Regaular" !important; 
           background-color: gray;
           padding-top: 50px;
           color:${(props) => props.theme.grayColor900};

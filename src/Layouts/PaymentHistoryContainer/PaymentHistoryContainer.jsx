@@ -9,6 +9,13 @@ const HistoryContainer = styled.div`
   background-color: white;
   padding: 16px 16px;
 `;
+const SubTitle = styled.div`
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 150%;
+  color: ${(props) => props.theme.brownColor500};
+  padding-bottom: 16px;
+`;
 
 // 결제수단 추가되면 결제내역 나오게 바꾸기
 function PaymentHistoryContainer({ title, content }) {
@@ -29,6 +36,7 @@ function PaymentHistoryContainer({ title, content }) {
   return (
     <>
       <HistoryContainer>
+        <SubTitle>내 결제내역</SubTitle>
         {historyList.slice(0, endNumber).map((history, index) => {
           return (
             <PaymentHistory key={index} history={history}></PaymentHistory>

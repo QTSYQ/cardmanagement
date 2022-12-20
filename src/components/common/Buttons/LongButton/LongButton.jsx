@@ -11,12 +11,16 @@ function LongButton({
   type,
   onSubmit,
 }) {
+  const Container = styled.div`
+    width: 100%;
+    padding-top: 4px;
+  `;
+
   const Button = styled.button`
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 8px;
     background-color: white;
     color: ${color};
     border: 1px solid ${color};
@@ -32,7 +36,6 @@ function LongButton({
       font-size: 16px;
       padding: 12px 16px;
       border-radius: 99px;
-      gap: 8px;
     }
     &:hover {
       cursor: pointer;
@@ -41,11 +44,13 @@ function LongButton({
 
   return (
     <>
-      <Button>
-        <Link to={to}>
-          {plusicon ? <FiPlus size={21} /> : null} {content}
-        </Link>
-      </Button>
+      <Container>
+        <Button>
+          <Link to={to}>
+            {plusicon ? <FiPlus size={21} /> : null} {content}
+          </Link>
+        </Button>
+      </Container>
     </>
   );
 }

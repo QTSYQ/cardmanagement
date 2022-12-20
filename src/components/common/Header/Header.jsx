@@ -8,6 +8,7 @@ const HeaderContainer = styled.div`
   padding: 16px 16px;
   display: flex;
   align-items: center;
+  background-color: white;
 `;
 
 function Header() {

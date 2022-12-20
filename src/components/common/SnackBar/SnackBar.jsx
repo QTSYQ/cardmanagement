@@ -69,7 +69,6 @@ const Content = styled.div`
 `;
 
 const SnackBar = forwardRef((props, ref) => {
-  console.log(ref);
   const [showSnackbar, setShowSnackbar] = useState(false);
   useImperativeHandle(ref, () => ({
     show() {

@@ -3,6 +3,8 @@ import styled from "styled-components";
 function PaymentHistoryEmptyContainer() {
   const Container = styled.div`
     padding: 16px 16px;
+    background-color: white;
+    height: 100vh;
   `;
 
   const HistoryEmpty = styled.div`
