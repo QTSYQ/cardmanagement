@@ -19,17 +19,17 @@ const SubTitle = styled.div`
 
 function PaymentHistoryContainer() {
   const { ref, inView } = useInView({
-    threshold: 1,
+    threshold: 0.5,
   });
 
-  const [endNumber, setEndNumber] = useState(3);
+  const [endNumber, setEndNumber] = useState(5);
   const [historyList, setHistoryList] = useState([]);
   useEffect(() => {
     setHistoryList(historyData);
   }, []);
 
   useEffect(() => {
-    setEndNumber(endNumber + 3);
+    setEndNumber(endNumber + 5);
   }, [inView]);
   return (
     <>
@@ -40,8 +40,8 @@ function PaymentHistoryContainer() {
             <PaymentHistory key={index} history={history}></PaymentHistory>
           );
         })}
-        <div ref={ref}></div>
       </HistoryContainer>
+      <div ref={ref}></div>
     </>
   );
 }

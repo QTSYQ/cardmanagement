@@ -37,7 +37,10 @@ function PaymentCardCreateContainer() {
   });
   const [submit, setSubmit] = useState(0);
   const snackbarRef = useRef(null);
-
+  const date = new Date();
+  const today = new Intl.DateTimeFormat("kr").format(date);
+  const month = today[6] + today[7];
+  const year = today[2] + today[3];
   useEffect(() => {
     const localCardList = localStorage.getItem("cardList");
     setCardList(JSON.parse(localCardList));
@@ -76,11 +79,29 @@ function PaymentCardCreateContainer() {
       snackbarRef.current.show();
       return 0;
     }
-
     if (!isValidCardNumber(cardNumber)) {
       snackbarRef.current.show();
       return 0;
     }
+    if (year > cardDate.slice(2, 4)) {
+      snackbarRef.current.show();
+      return 0;
+    } else if (year == cardDate.slice(2, 4)) {
+      if (month > cardDate.slice(0, 2)) {
+        snackbarRef.current.show();
+        return 0;
+      }
+    }
+
+    const cardDuplication = cardList.map((card) => {
+      return card.cardNumber == cardNumber;
+    });
+    console.log(cardDuplication.includes(true));
+    if (cardDuplication.includes(true)) {
+      snackbarRef.current.show();
+      return 0;
+    }
+
     const localCardList = localStorage.getItem("cardList");
     setCardList(JSON.parse(localCardList));
     isCorporation
@@ -390,6 +411,7 @@ function PaymentCardCreateContainer() {
           title="카드정보 오류"
           content="결제수단을 추가할 수 없습니다"
           ref={snackbarRef}
+          color="#B63C34"
         ></SnackBar>
       </Container>
     </>

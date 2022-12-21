@@ -1,6 +1,9 @@
 import React, { useState, forwardRef, useImperativeHandle } from "react";
 import styled from "styled-components";
-import { IoMdCloseCircleOutline } from "react-icons/io";
+import {
+  IoMdCloseCircleOutline,
+  IoMdCheckmarkCircleOutline,
+} from "react-icons/io";
 const Container = styled.div`
   position: fixed;
   width: 298px;
@@ -51,7 +54,6 @@ const ContentContainer = styled.div`
 
 const Title = styled.div`
   font-family: "Pretendard-Regaular";
-  color: ${(props) => props.theme.errorColor500};
   font-size: 12px;
   font-weight: 700;
   align-items: center;
@@ -78,10 +80,10 @@ const SnackBar = forwardRef((props, ref) => {
       <Container ref={ref} className={showSnackbar ? "show" : "hide"}>
         <IoMdCloseCircleOutline
           size={19}
-          color="#B63C34"
+          color={props.color}
         ></IoMdCloseCircleOutline>
         <ContentContainer>
-          <Title>{props.title}</Title>
+          <Title color={props.color}>{props.title}</Title>
           <Content>{props.content}</Content>
         </ContentContainer>
       </Container>

@@ -1,9 +1,10 @@
 import styled from "styled-components";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import CircleCheckBox from "./../../../components/common/CheckBox/CircleCheckBox/CircleCheckBox";
 import CardInfo from "../../../components/common/CardInfo/CardInfo";
 import StyledModal from "./../../../components/common/Modal/StyledModal/StyledModal";
 import ShortButton from "./../../../components/common/Buttons/ShortButton/ShortButton";
+import SnackBar from "../../../components/common/SnackBar/SnackBar";
 
 const BottomButtonContainer = styled.div`
   position: fixed;
@@ -40,7 +41,12 @@ function PaymentManagementFormContainer() {
   const [modalButtonDisable, setModalButtonDisable] = useState(true);
   const [isCardDeleteValid, setIsCardDeleteValid] = useState(false);
   const [buttonDisable, setButtonDisable] = useState(true);
+  const snackbarRef = useRef(null);
   useEffect(() => {
+    console.log("modalButtonDisable : ", modalButtonDisable);
+    console.log("checkNumber : ", checkNumber);
+    console.log("isCardDeleteValid : ", isCardDeleteValid);
+    console.log("buttonDisable : ", buttonDisable);
     if (checkNumber == 0) {
       setIsCardDeleteValid(false);
       setButtonDisable(true);
@@ -61,6 +67,7 @@ function PaymentManagementFormContainer() {
     cardList.splice(checkNumber, 1);
     localStorage.setItem("cardList", JSON.stringify(cardList));
     setCardList(JSON.parse(localStorage.getItem("cardList")));
+    setIsCheckNumber(0);
   }
 
   function isDefaultCardChange() {
@@ -72,6 +79,7 @@ function PaymentManagementFormContainer() {
     cardList[checkNumber].isDefault = false;
     localStorage.setItem("cardList", JSON.stringify(cardList));
     setCardList(JSON.parse(localStorage.getItem("cardList")));
+    snackbarRef.current.show();
   }
 
   return (
@@ -155,6 +163,12 @@ function PaymentManagementFormContainer() {
           disable={buttonDisable}
           onClick={isDefaultCardChange}
         ></ShortButton>
+        <SnackBar
+          title="카드정보 변경성공"
+          content="대표카드를 변경했습니다"
+          ref={snackbarRef}
+          color="#619257"
+        ></SnackBar>
       </BottomButtonContainer>
     </>
   );
