@@ -14,9 +14,8 @@ const GlobalStyles = createGlobalStyle`
       }
       body {
         font-family:  "Pretendard-Regaular" !important; 
-          background-color: gray;
-          padding-top: 50px;
-          color:${(props) => props.theme.grayColor900};
+        background-color: gray;
+        color:${(props) => props.theme.grayColor900};
       }
   `;
 
