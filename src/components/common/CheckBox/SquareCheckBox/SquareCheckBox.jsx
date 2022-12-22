@@ -27,10 +27,10 @@ const Label = styled.label`
   display: flex;
   cursor: pointer;
 `;
-function CheckBox({ content, isChecked, onChange }) {
+function CheckBox({ content, isChecked, onChange, paddingtop }) {
   return (
     <>
-      <Container>
+      <Container style={{ paddingTop: paddingtop }}>
         <Label>
           <Input type="checkbox" onChange={onChange} />
           <Icon>

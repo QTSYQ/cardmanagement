@@ -372,6 +372,7 @@ function PaymentCardCreateContainer() {
             onChange={(event) => {
               setIsDefault(!isDefault);
             }}
+            paddingtop="16px"
           />
           {isCorporation ? (
             <BottomLongButton

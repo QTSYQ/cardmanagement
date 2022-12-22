@@ -1,10 +1,6 @@
 import styled from "styled-components";
 import React, { useEffect, useState } from "react";
 import MainContainer from "../MainContainer/MainContainer";
-// import PaymentHeaderContainer from "../PaymentHeaderContainer/PaymentHeaderContainer";
-// import PaymentContainer from "../../pages/MainPage/PaymentContainer/PaymentContainer";
-// import PaymentHistoryEmptyContainer from "./../PaymentHistoryEmptyContainer/PaymentHistoryEmptyContainer";
-// import PaymentHistoryContainer from "./../PaymentHistoryContainer/PaymentHistoryContainer";
 import PaymentHeaderContainer from "./../PaymentHeaderContainer/PaymentHeaderContainer";
 import PaymentContainer from "./../../pages/MainPage/PaymentContainer/PaymentContainer";
 import PaymentHistoryEmptyContainer from "./../../pages/MainPage/PaymentHistoryEmptyContainer/PaymentHistoryEmptyContainer";
@@ -33,7 +29,7 @@ function PaymentMainPage() {
         <Container>
           <PaymentHeaderContainer
             title="결제관리"
-            content="결제수단과 결제내역을 확인할 수 있습니다."
+            content="결제수단과 결제내역을 확인할 수 있습니다"
           />
           <PaymentContainer title="내 결제수단" />
           {cardList.length < 1 ? (
