@@ -43,10 +43,6 @@ function PaymentManagementFormContainer() {
   const [buttonDisable, setButtonDisable] = useState(true);
   const snackbarRef = useRef(null);
   useEffect(() => {
-    console.log("modalButtonDisable : ", modalButtonDisable);
-    console.log("checkNumber : ", checkNumber);
-    console.log("isCardDeleteValid : ", isCardDeleteValid);
-    console.log("buttonDisable : ", buttonDisable);
     if (checkNumber == 0) {
       setIsCardDeleteValid(false);
       setButtonDisable(true);
