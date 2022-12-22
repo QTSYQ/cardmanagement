@@ -41,7 +41,7 @@ function PaymentManagementFormContainer() {
   const [modalButtonDisable, setModalButtonDisable] = useState(true);
   const [isCardDeleteValid, setIsCardDeleteValid] = useState(false);
   const [buttonDisable, setButtonDisable] = useState(true);
-  const snackbarRef = useRef(null);
+  const snackBarRef = useRef(null);
   useEffect(() => {
     if (checkNumber == 0) {
       setIsCardDeleteValid(false);
@@ -75,7 +75,7 @@ function PaymentManagementFormContainer() {
     cardList[checkNumber].isDefault = false;
     localStorage.setItem("cardList", JSON.stringify(cardList));
     setCardList(JSON.parse(localStorage.getItem("cardList")));
-    snackbarRef.current.show();
+    snackBarRef.current.show();
   }
 
   return (
@@ -162,7 +162,7 @@ function PaymentManagementFormContainer() {
         <SnackBar
           title="카드정보 변경성공"
           content="대표카드를 변경했습니다"
-          ref={snackbarRef}
+          ref={snackBarRef}
           color="#619257"
         ></SnackBar>
       </BottomButtonContainer>

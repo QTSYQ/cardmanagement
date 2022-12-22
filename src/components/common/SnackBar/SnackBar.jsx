@@ -1,9 +1,6 @@
 import React, { useState, forwardRef, useImperativeHandle } from "react";
 import styled from "styled-components";
-import {
-  IoMdCloseCircleOutline,
-  IoMdCheckmarkCircleOutline,
-} from "react-icons/io";
+import { IoMdCloseCircleOutline } from "react-icons/io";
 const Container = styled.div`
   position: fixed;
   width: 298px;
